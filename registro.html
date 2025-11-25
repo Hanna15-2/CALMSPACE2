@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Datos - Pulsioxímetro</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f5e6ff;
+        }
+    </style>
+</head>
+<body>
+    <header>Registro de datos del pulsioxímetro</header>
+    
+    <button onclick="connectDevice()">Conectar Pulsioxímetro</button>
+    
+    <p><strong>Nivel de Oxígeno:</strong> <span id="oxigeno">--</span> %</p>
+    <p><strong>Ritmo Cardíaco:</strong> <span id="ritmo">--</span> bpm</p>
+
+    <h2>Valores Promedio Según Edad y Género</h2>
+    <table>
+        <tr>
+            <th>Edad</th>
+            <th>Género</th>
+            <th>Oxígeno (%)</th>
+            <th>Ritmo Cardíaco (bpm)</th>
+        </tr>
+        <tr>
+            <td>18-30</td>
+            <td>Masculino</td>
+            <td>95-99</td>
+            <td>60-80</td>
+        </tr>
+        <tr>
+            <td>18-30</td>
+            <td>Femenino</td>
+            <td>95-99</td>
+            <td>60-90</td>
+        </tr>
+        <tr>
+            <td>31-50</td>
+            <td>Masculino</td>
+            <td>94-98</td>
+            <td>65-85</td>
+        </tr>
+        <tr>
+            <td>31-50</td>
+            <td>Femenino</td>
+            <td>94-98</td>
+            <td>65-90</td>
+        </tr>
+        <tr>
+            <td>51+</td>
+            <td>Masculino</td>
+            <td>93-97</td>
+            <td>70-90</td>
+        </tr>
+        <tr>
+            <td>51+</td>
+            <td>Femenino</td>
+            <td>93-97</td>
+            <td>70-95</td>
+        </tr>
+    </table>
+
+    <script>
+        async function connectDevice() {
+            try {
+                const device = await navigator.bluetooth.requestDevice({
+                    acceptAllDevices: true,
+                    optionalServices: ['heart_rate']
+                });
+
+                const server = await device.gatt.connect();
+                const service = await server.getPrimaryService('heart_rate');
+                const characteristic = await service.getCharacteristic('heart_rate_measurement');
+
+                characteristic.addEventListener('characteristicvaluechanged', (event) => {
+                    let value = event.target.value;
+                    let heartRate = value.getUint8(1);  
+                    document.getElementById('ritmo').innerText = heartRate;
+                });
+
+                await characteristic.startNotifications();
+                alert("Conectado al pulsioxímetro");
+
+            } catch (error) {
+                console.error("Error al conectar:", error);
+                alert("No se pudo conectar al dispositivo");
+            }
+        }
+    </script>
+</body>
+</html>
