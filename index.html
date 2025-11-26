@@ -49,29 +49,18 @@
             transition: 0.3s;
             width: 250px;
             text-align: center;
-            font-family: 'Caudex', serif;
         }
 
         .menu a:hover {
             background-color: #97C68A;
         }
 
-        /* Emergencias */
         .emergency {
             margin-top: 50px;
-            font-size: 1em;
-            color: black;
         }
 
-        .emergency a {
-            color: #2E5B24;
-            text-decoration: none;
-            font-weight: bold;
-            font-family: 'Caudex', serif;
-        }
-
-        /* Botón del chatbot */
-        #chatBotToggle {
+        /* BOTÓN DEL CHATBOT */
+        #chatToggle {
             position: fixed;
             bottom: 1in;
             right: 1in;
@@ -83,14 +72,12 @@
             height: 60px;
             font-size: 24px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             z-index: 999;
-            font-weight: bold;
-            font-family: 'Caudex', serif;
         }
 
-        /* Ventana del chatbot */
-        #chatBotWindow {
+        /* VENTANA DEL CHATBOT */
+        #chatWindow {
             position: fixed;
             bottom: 1.2in;
             right: 1in;
@@ -98,20 +85,13 @@
             height: 500px;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
             display: none;
             overflow: hidden;
             z-index: 998;
             border: 3px solid #ACD9A5;
         }
 
-        #chatBotWindow iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        #closeChatBtn {
+        #chatClose {
             position: absolute;
             top: 8px;
             right: 12px;
@@ -119,18 +99,21 @@
             border: none;
             font-size: 20px;
             cursor: pointer;
-            color: #2E5B24;
-            font-weight: bold;
-            font-family: 'Caudex', serif;
         }
 
-        /* --- BOTÓN DE VIDEOCHAT --- */
-        #videoChatBtn {
+        #chatWindow iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* BOTÓN DEL VIDEOCHAT */
+        #videoToggle {
             position: fixed;
             bottom: 1in;
-            right: 2.3in;
-            background-color: #97C68A;
-            color: #2E5B24;
+            right: 4.5in;
+            background-color: #FFB6C1;
+            color: #8B0000;
             border: none;
             border-radius: 50%;
             width: 60px;
@@ -139,38 +122,24 @@
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             z-index: 999;
-            font-weight: bold;
-            font-family: 'Caudex', serif;
-            transition: 0.3s;
         }
 
-        #videoChatBtn:hover {
-            background-color: #7BB578;
-        }
-
-        /* --- VENTANA DEL VIDEOCHAT --- */
-        #videoChatWindow {
+        /* VENTANA DEL VIDEOCHAT */
+        #videoWindow {
             position: fixed;
             bottom: 1.2in;
-            right: 2.3in;
-            width: 450px;
-            height: 520px;
+            right: 4.5in;
+            width: 350px;
+            height: 500px;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
             display: none;
             overflow: hidden;
             z-index: 998;
-            border: 3px solid #ACD9A5;
+            border: 3px solid #FFB6C1;
         }
 
-        #videoChatWindow iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        #closeVideoBtn {
+        #videoClose {
             position: absolute;
             top: 8px;
             right: 12px;
@@ -178,19 +147,20 @@
             border: none;
             font-size: 20px;
             cursor: pointer;
-            color: #2E5B24;
-            font-weight: bold;
-            font-family: 'Caudex', serif;
+        }
+
+        #videoWindow iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
     </style>
 </head>
 
 <body>
-
     <img class="logo" src="image.png" alt="Logo CalmSpace">
 
-    <!-- MENU VERTICAL -->
     <div class="menu">
         <a href="registro.html">Registro de Datos</a>
         <a href="tecnicas.html">Centro de Relajación</a>
@@ -204,39 +174,44 @@
             <a href="linea_psicológica.pdf" target="_blank">Ver aquí</a></strong></p>
     </div>
 
-    <!-- Botón flotante del chatbot -->
-    <button id="chatBotToggle">💬</button>
+    <!-- BOTÓN FLOTANTE CHATBOT -->
+    <button id="chatToggle">💬</button>
 
-    <!-- Ventana flotante del chatbot -->
-    <div id="chatBotWindow">
-        <button id="closeChatBtn" title="Cerrar">✖</button>
+    <!-- VENTANA CHATBOT -->
+    <div id="chatWindow">
+        <button id="chatClose">✖</button>
         <iframe src="chat.html"></iframe>
     </div>
 
-    <!-- Botón flotante del Videochat -->
-    <button id="videoChatBtn">🎥</button>
+    <!-- BOTÓN FLOTANTE VIDEOCHAT -->
+    <button id="videoToggle">🎥</button>
 
-    <!-- Ventana flotante del Videochat -->
-    <div id="videoChatWindow">
-        <button id="closeVideoBtn" title="Cerrar">✖</button>
+    <!-- VENTANA VIDEOCHAT -->
+    <div id="videoWindow">
+        <button id="videoClose">✖</button>
         <iframe src="videochat.html"></iframe>
     </div>
 
+
     <script>
-        /* CHATBOT */
-        const toggleBtn = document.getElementById("chatBotToggle");
-        const chatWindow = document.getElementById("chatBotWindow");
-        const closeBtn = document.getElementById("closeChatBtn");
+        // Chatbot
+        document.getElementById("chatToggle").onclick = () => {
+            const w = document.getElementById("chatWindow");
+            w.style.display = w.style.display === "block" ? "none" : "block";
+        };
+        document.getElementById("chatClose").onclick = () => {
+            document.getElementById("chatWindow").style.display = "none";
+        };
 
-        toggleBtn.addEventListener("click", () => {
-            chatWindow.style.display =
-                chatWindow.style.display === "block" ? "none" : "block";
-        });
+        // Videochat
+        document.getElementById("videoToggle").onclick = () => {
+            const v = document.getElementById("videoWindow");
+            v.style.display = v.style.display === "block" ? "none" : "block";
+        };
+        document.getElementById("videoClose").onclick = () => {
+            document.getElementById("videoWindow").style.display = "none";
+        };
+    </script>
 
-        closeBtn.addEventListener("click", () => {
-            chatWindow.style.display = "none";
-        });
-
-        /* VIDEOCHAT */
-        const videoBtn = document.getEl
-
+</body>
+</html>
