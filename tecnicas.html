@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Centro de Relajación</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet" />
 
     <style>
         body {
@@ -21,237 +22,116 @@
         }
 
         header h1 {
-            font-size: 2.4em;
+            margin: 0;
+            font-size: 2.5em;
+            color: #2E5B24;
         }
 
-        /* CONTENEDOR GENERAL */
-        .contenedor {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
+        .menu-container {
+            max-width: 1100px;
+            margin: auto;
             padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        /* TARJETAS */
-        .tarjeta {
+        .card {
             background-color: #DCE5D9;
-            border-radius: 12px;
-            width: 300px;
-            padding: 18px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+            padding: 20px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .tarjeta h2 {
-            text-align: center;
-            margin-bottom: 10px;
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+        }
+
+        .card h2 {
+            margin-top: 10px;
+            color: #244B1D;
             font-size: 1.4em;
         }
 
-        /* VIDEO */
-        .video-container video {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        /* BOTÓN GENERAL */
-        button {
+        .card button {
             background-color: #2E5B24;
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
+            padding: 12px 18px;
+            border-radius: 10px;
             cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+            transition: 0.3s ease;
             font-family: 'Caudex', serif;
-            width: 100%;
-            margin-top: 8px;
         }
 
-        button:hover {
+        .card button:hover {
             background-color: #244B1D;
         }
 
-        /* AUDIO */
-        audio { width: 100%; margin-top: 10px; }
-
-        /* TEMPORIZADOR */
-        #timerDisplay {
-            font-size: 2em;
+        footer {
             text-align: center;
-            margin-top: 10px;
-        }
-
-        /* DIARIO */
-        textarea {
-            width: 100%;
-            height: 120px;
-            border-radius: 10px;
-            border: 2px solid #2E5B24;
-            padding: 10px;
-            font-family: 'Caudex', serif;
-        }
-
-        /* EXPRESIÓN CREATIVA */
-        canvas {
-            border: 2px solid #2E5B24;
-            border-radius: 10px;
-            width: 100%;
-            height: 250px;
+            padding: 15px;
+            margin-top: 30px;
+            font-size: 1em;
         }
     </style>
 </head>
-
 <body>
-<header>
-    <h1>Centro de Relajación</h1>
-</header>
+    <header>
+        <h1>Centro de Relajación</h1>
+    </header>
 
-<div class="contenedor">
+    <div class="menu-container">
 
-    <!-- VIDEOS RESPIRACIÓN (se integran desde tu archivo actual) -->
-    <div class="tarjeta">
-        <h2>Técnicas de Respiración</h2>
-        <p>Incluye tus tres videos completos aquí tal como los tienes.</p>
+        <div class="card">
+            <h2>Técnicas de Respiración</h2>
+            <button onclick="location.href='tecnicas_respiracion.html'">Ir</button>
+        </div>
+
+        <div class="card">
+            <h2>Sonidos Ambientales</h2>
+            <button onclick="location.href='sonidos_ambientales.html'">Ir</button>
+        </div>
+
+        <div class="card">
+            <h2>Temporizador de Meditación</h2>
+            <button onclick="location.href='temporizador_meditacion.html'">Ir</button>
+        </div>
+
+        <div class="card">
+            <h2>Mini‑Lecturas Relajantes</h2>
+            <button onclick="location.href='lecturas_relajantes.html'">Ir</button>
+        </div>
+
+        <div class="card">
+            <h2>Técnicas de Regulación</h2>
+            <button onclick="location.href='tecnicas_regulacion.html'">Ir</button>
+        </div>
+
+        <div class="card">
+            <h2>Botón de Emergencia Emocional</h2>
+            <button onclick="location.href='emergencia_emocional.html'">Ir</button>
+        </div>
+
+        <div class="card">
+            <h2>Diario Emocional</h2>
+            <button onclick="location.href='diario_emocional.html'">Ir</button>
+        </div>
+
+        <div class="card">
+            <h2>Expresión Creativa</h2>
+            <button onclick="location.href='expresion_creativa.html'">Ir</button>
+        </div>
+
     </div>
 
-    <!-- ARTÍCULOS RELACIONADOS -->
-    <div class="tarjeta">
-        <h2>Artículos para Aprender Más</h2>
-        <p>Información útil sobre estrés y ansiedad.</p>
-        <a href="tu_articulo.html" style="color:#2E5B24; font-weight:bold;">Leer artículo</a>
-    </div>
-
-    <!-- SONIDOS AMBIENTALES -->
-    <div class="tarjeta">
-        <h2>Sonidos Ambientales</h2>
-        <button onclick="mostrarAudio('lluvia')">🌧 Lluvia</button>
-        <audio id="lluvia" src="lluvia.mp3" controls style="display:none"></audio>
-
-        <button onclick="mostrarAudio('mar')">🌊 Mar</button>
-        <audio id="mar" src="mar.mp3" controls style="display:none"></audio>
-
-        <button onclick="mostrarAudio('bosque')">🌿 Bosque</button>
-        <audio id="bosque" src="bosque.mp3" controls style="display:none"></audio>
-    </div>
-
-    <!-- TEMPORIZADOR DE MEDITACIÓN -->
-    <div class="tarjeta">
-        <h2>Temporizador de Meditación</h2>
-        <button onclick="iniciarTimer(1)">1 minuto</button>
-        <button onclick="iniciarTimer(3)">3 minutos</button>
-        <button onclick="iniciarTimer(5)">5 minutos</button>
-        <div id="timerDisplay">00:00</div>
-    </div>
-
-    <!-- MINI LECTURAS RELAJANTES -->
-    <div class="tarjeta">
-        <h2>Lecturas Calmantes</h2>
-        <p id="fraseRelax">Haz clic para recibir una frase.</p>
-        <button onclick="nuevaFrase()">💚 Nueva frase</button>
-    </div>
-
-    <!-- TÉCNICAS DE REGULACIÓN -->
-    <div class="tarjeta">
-        <h2>Regulación Emocional</h2>
-        <ul>
-            <li>✨ Técnica 5-4-3-2-1</li>
-            <li>❄ Técnica del hielo</li>
-            <li>🧊 Respiración para crisis</li>
-            <li>🛑 Técnica STOP</li>
-        </ul>
-    </div>
-
-    <!-- BOTÓN DE EMERGENCIA -->
-    <div class="tarjeta">
-        <h2>Emergencia Emocional</h2>
-        <button onclick="emergencia()" style="background:#b73232;">Necesito Calma Ya</button>
-        <p id="mensajeEmergencia"></p>
-    </div>
-
-    <!-- EXPRESIÓN CREATIVA -->
-    <div class="tarjeta">
-        <h2>Área de Expresión Creativa</h2>
-        <canvas id="canvasDibujo"></canvas>
-        <button onclick="limpiarCanvas()">Limpiar</button>
-    </div>
-
-    <!-- DIARIO EMOCIONAL -->
-    <div class="tarjeta">
-        <h2>Diario Emocional</h2>
-        <textarea id="diario" placeholder="Escribe cómo te sientes..."></textarea>
-        <button onclick="guardarDiario()">Guardar</button>
-    </div>
-</div>
-
-<script>
-    /* SONIDOS */
-    function mostrarAudio(id) {
-        const audio = document.getElementById(id);
-        const visible = audio.style.display === 'block';
-        document.querySelectorAll('audio').forEach(a => { a.style.display='none'; a.pause(); });
-        if (!visible) audio.style.display = 'block';
-    }
-
-    /* TEMPORIZADOR */
-    let tiempoRestante;
-    let intervalo;
-
-    function iniciarTimer(minutos) {
-        clearInterval(intervalo);
-        tiempoRestante = minutos * 60;
-        intervalo = setInterval(() => {
-            const min = Math.floor(tiempoRestante / 60).toString().padStart(2,'0');
-            const sec = (tiempoRestante % 60).toString().padStart(2,'0');
-            document.getElementById('timerDisplay').textContent = `${min}:${sec}`;
-            if (tiempoRestante-- <= 0) clearInterval(intervalo);
-        }, 1000);
-    }
-
-    /* FRASES RELAJANTES */
-    function nuevaFrase() {
-        const frases = [
-            "Respira. Este momento pasará.",
-            "La calma vuelve a ti.",
-            "No tienes que hacerlo todo hoy.",
-            "Un minuto de paz transforma tu día.",
-            "Mereces tranquilidad."
-        ];
-        const frase = frases[Math.floor(Math.random() * frases.length)];
-        document.getElementById('fraseRelax').textContent = frase;
-    }
-
-    /* EMERGENCIA */
-    function emergencia() {
-        document.getElementById('mensajeEmergencia').textContent =
-        "Respira conmigo: Inhala 4s... Sostén 4s... Exhala 6s. Estoy contigo.";
-    }
-
-    /* DIBUJO */
-    const canvas = document.getElementById('canvasDibujo');
-    const ctx = canvas.getContext('2d');
-    let dibujando = false;
-
-    canvas.addEventListener('mousedown', () => dibujando = true);
-    canvas.addEventListener('mouseup', () => dibujando = false);
-    canvas.addEventListener('mousemove', dibujar);
-
-    function dibujar(e) {
-        if (!dibujando) return;
-        ctx.fillStyle = '#2E5B24';
-        ctx.fillRect(e.offsetX, e.offsetY, 4, 4);
-    }
-
-    function limpiarCanvas() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-    }
-
-    /* DIARIO */
-    function guardarDiario() {
-        localStorage.setItem('diario', document.getElementById('diario').value);
-        alert("Guardado ✔");
-    }
-</script>
-
+    <footer>
+        <p>&copy; 2025 Espacio de Calma</p>
+    </footer>
 </body>
 </html>
-
