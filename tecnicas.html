@@ -1,239 +1,337 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Técnicas de Respiración</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Relajación</title>
 
-<!-- Fuente Caudex -->
-<link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Fuente Caudex -->
+    <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
 
-<style>
-body {
-    font-family: 'Caudex', serif;
-    background-color: #F4F7F2;
-    margin: 0; padding: 0;
-    color: #2E5B24;
-}
+    <style>
+        body {
+            font-family: 'Caudex', serif;
+            background-color: #F4F7F2;
+            margin: 0;
+            padding: 0;
+            color: #2E5B24;
+        }
 
-header {
-    text-align: center;
-    padding: 20px;
-}
+        header {
+            text-align: center;
+            padding: 20px;
+        }
 
-/* Tarjetas de técnicas */
-.tecnica {
-    width: 30%;
-    background-color: #DCE5D9;
-    padding: 18px;
-    margin: 15px;
-    border-radius: 12px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
-    text-align: center;
-}
+        header h1 {
+            font-size: 2.4em;
+            margin: 0;
+        }
 
-.btn-video, .btn-info, .btn-music, .btn-timer, .btn-save {
-    background-color: #2E5B24;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'Caudex', serif;
-    transition: 0.3s;
-}
-.btn-video:hover, .btn-info:hover, .btn-music:hover, .btn-timer:hover, .btn-save:hover {
-    background-color: #244B1D;
-}
+        /* Grid de 2x2 para videos */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 20px;
+            width: 90%;
+            margin: auto;
+        }
 
-main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+        .tecnica {
+            background-color: #DCE5D9;
+            padding: 18px;
+            border-radius: 14px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
 
-/* Bloques grandes */
-.section-block {
-    width: 90%;
-    background-color: #DCE5D9;
-    margin: 30px auto;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
-    text-align: center;
-}
+        .btn-video {
+            background-color: #2E5B24;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: 0.3s ease;
+        }
+        .btn-video:hover {
+            background-color: #244B1D;
+        }
 
-/* Botón rojo emergencia */
-.boton-emergencia {
-    background-color: #C62828;
-    color: white;
-    padding: 15px 20px;
-    font-size: 1.3em;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-.boton-emergencia:hover {
-    background-color: #A61717;
-}
+        .video-container {
+            display: none;
+            margin-top: 10px;
+        }
 
-/* Diario emocional */
-textarea {
-    width: 90%;
-    height: 180px;
-    padding: 12px;
-    border-radius: 10px;
-    font-family: 'Caudex', serif;
-    border: 2px solid #2E5B24;
-}
+        video {
+            width: 100%;
+            border-radius: 10px;
+        }
 
-/* Área de dibujo */
-#canvas-dibujo {
-    background: white;
-    border: 2px solid #2E5B24;
-    border-radius: 10px;
-}
-</style>
+        /* Minilecturas – Post-it */
+        .postit {
+            background-color: #FFF7A8;
+            width: 260px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            font-size: 1.1em;
+            position: absolute;
+            right: 20px;
+            top: 160px;
+        }
+
+        /* Botón de emergencia */
+        .boton-emergencia {
+            background-color: #C62828;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 420px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            transition: .3s ease;
+        }
+        .boton-emergencia:hover {
+            background-color: #8A1C1C;
+        }
+
+        /* Área de expresión creativa */
+        .drawing-area {
+            width: 90%;
+            margin: 40px auto;
+            background: #E7EEE4;
+            padding: 20px;
+            border-radius: 14px;
+        }
+
+        #lienzo {
+            width: 100%;
+            height: 250px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            cursor: crosshair;
+        }
+
+        .btn-limpiar {
+            background-color: #2E5B24;
+            color: white;
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Temporizador */
+        .timer-box {
+            width: 90%;
+            margin: 20px auto;
+            background-color: #DCE5D9;
+            padding: 20px;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .timer-btn {
+            background-color: #2E5B24;
+            color: white;
+            padding: 10px 14px;
+            border: none;
+            margin: 6px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #timer-display {
+            font-size: 2em;
+            margin-top: 10px;
+        }
+
+        /* Información importante */
+        .info-box {
+            background-color: #FFF0D1;
+            width: 90%;
+            margin: 25px auto;
+            padding: 20px;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 1.2em;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-<h1>Técnicas de Respiración</h1>
+    <h1>Centro de Relajación</h1>
 </header>
 
-<main>
-    <!-- Aquí se mantienen tus 4 técnicas EXACTAS -->
-    <!-- ------------------------------ -->
-    <!-- No modifiqué nada de esta parte -->
-    <!-- ------------------------------ -->
+<!-- MINILECTURAS -->
+<div class="postit">
+    <strong>Mini-Lecturas Relajantes</strong><br><br>
+    🌿 *Respira… tu cuerpo sabe volver al equilibrio.*<br><br>
+    ✨ *Eres más fuerte que este instante difícil.*<br><br>
+    💛 *La calma no llega sola, tú la construyes poco a poco.*
+</div>
 
+<!-- BOTÓN DE EMERGENCIA -->
+<button class="boton-emergencia">⚠ Emergencia Emocional</button>
+
+<!-- VIDEOS 2x2 -->
+<div class="videos-grid">
+
+    <!-- 1 -->
     <div class="tecnica">
-        <button class="btn-video" onclick="mostrarVideo('video1')">Ver Video</button>
-        <div class="video-container" id="video1" style="display:none;">
+        <button class="btn-video" onclick="mostrarVideo('v1')">Ver Video</button>
+        <div id="v1" class="video-container">
             <video controls>
                 <source src="Respiracion_Diafragma.mp4">
             </video>
         </div>
         <h2>Respiración Diafragmática</h2>
-        <p>Favorece la oxigenación del cuerpo y reduce el estrés.</p>
+        <p>Activa el sistema nervioso parasimpático y relaja todo el cuerpo.</p>
+        <h3>¿Cómo hacerla?</h3>
+        <p>Inhala inflando abdomen, retén y exhala lento.</p>
     </div>
 
+    <!-- 2 -->
     <div class="tecnica">
-        <button class="btn-video" onclick="mostrarVideo('video2')">Ver Video</button>
-        <div class="video-container" id="video2" style="display:none;">
+        <button class="btn-video" onclick="mostrarVideo('v2')">Ver Video</button>
+        <div id="v2" class="video-container">
             <video controls>
                 <source src="Respiracion_4-7-8.mp4">
             </video>
         </div>
         <h2>Respiración 4-7-8</h2>
-        <p>Regula el ritmo cardíaco y relaja profundamente.</p>
+        <p>Reduce el ritmo cardíaco y genera calma profunda.</p>
+        <h3>¿Cómo hacerla?</h3>
+        <p>Inhala 4s, sostén 7s, exhala 8s.</p>
     </div>
 
+    <!-- 3 -->
     <div class="tecnica">
-        <button class="btn-video" onclick="mostrarVideo('video3')">Ver Video</button>
-        <div class="video-container" id="video3" style="display:none;">
+        <button class="btn-video" onclick="mostrarVideo('v3')">Ver Video</button>
+        <div id="v3" class="video-container">
             <video controls>
                 <source src="Respiracion_Alterna.mp4">
             </video>
         </div>
         <h2>Respiración Alterna</h2>
-        <p>Equilibra mente y cuerpo.</p>
+        <p>Equilibra los hemisferios y mejora la concentración.</p>
+        <h3>¿Cómo hacerla?</h3>
+        <p>Cierra una fosa, inhala, cambia y exhala.</p>
     </div>
 
+    <!-- 4 -->
     <div class="tecnica">
-        <button class="btn-video" onclick="mostrarVideo('video4')">Ver Video</button>
-        <div class="video-container" id="video4" style="display:none;">
+        <button class="btn-video" onclick="mostrarVideo('v4')">Ver Video</button>
+        <div id="v4" class="video-container">
             <video controls>
-                <source src="Respiracion_BoxBreathing.mp4">
+                <source src="Respiracion_Box.mp4">
             </video>
         </div>
-        <h2>Box Breathing 4-4-4-4</h2>
-        <p>Rápida reducción de ansiedad.</p>
+        <h2>Respiración en Caja (4-4-4-4)</h2>
+        <p>Ideal para cortar crisis y estabilizar.</p>
+        <h3>¿Cómo hacerla?</h3>
+        <p>Inhala 4s, sostén 4s, exhala 4s, pausa 4s.</p>
     </div>
 
-</main>
+</div>
 
-<!-- INFORMACIÓN EXTRA -->
-<section class="section-block">
-    <h2>Información Importante</h2>
-    <p>Respirar lento, hidratarte y tomar descansos ayuda a regular la ansiedad.</p>
-    <button class="btn-info" onclick="window.open('articulo.html')">Leer artículo</button>
-</section>
+<!-- TEMPORIZADOR -->
+<div class="timer-box">
+    <h2>Temporizador de Meditación</h2>
 
-<!-- MÚSICA -->
-<section class="section-block">
-    <h2>Música Relajante</h2>
-    <audio id="relaxMusic" src="relax.mp3"></audio>
-    <button class="btn-music" onclick="document.getElementById('relaxMusic').play()">▶ Reproducir</button>
-</section>
+    <button class="timer-btn" onclick="iniciarTimer(60)">1 min</button>
+    <button class="timer-btn" onclick="iniciarTimer(180)">3 min</button>
+    <button class="timer-btn" onclick="iniciarTimer(300)">5 min</button>
+    <button class="timer-btn" onclick="iniciarTimer(600)">10 min</button>
+    <button class="timer-btn" onclick="reiniciarTimer()">Reiniciar</button>
 
-<!-- TEMPORIZADOR EMOCIONAL -->
-<section class="section-block">
-    <h2>Temporizador Emocional</h2>
-    <p id="timerDisplay" style="font-size:2em;">00:30</p>
-    <button class="btn-timer" onclick="iniciarTemporizador()">Iniciar 30s</button>
-</section>
+    <div id="timer-display">00:00</div>
+</div>
 
-<!-- DIARIO EMOCIONAL -->
-<section class="section-block">
-    <h2>Diario Emocional</h2>
-    <textarea placeholder="Escribe cómo te sientes..."></textarea>
-</section>
-
-<!-- EXPRESIÓN CREATIVA -->
-<section class="section-block">
+<!-- ÁREA CREATIVA -->
+<div class="drawing-area">
     <h2>Área de Expresión Creativa</h2>
-    <canvas id="canvas-dibujo" width="300" height="200"></canvas>
-</section>
+    <canvas id="lienzo"></canvas>
+    <button class="btn-limpiar" onclick="limpiarCanvas()">Limpiar</button>
+</div>
 
-<!-- BOTÓN DE EMERGENCIA -->
-<section class="section-block">
-    <h2>Emergencia Emocional</h2>
-    <button class="boton-emergencia" onclick="alert('Respira… ya viene ayuda.')">
-        ⚠ Necesito Ayuda Ahora
-    </button>
-</section>
+<!-- INFORMACIÓN IMPORTANTE -->
+<div class="info-box">
+    <strong>Información importante</strong><br><br>
+    Respirar lento, hidratarte y tomar descansos ayuda a regular la ansiedad.<br><br>
 
-<footer style="text-align:center; padding:20px;">
-<p>&copy; 2025 Espacio de Calma</p>
-</footer>
+    ⭐ **Recuerda esto:**  
+    *Tu sistema nervioso NO está roto, solo está sobrecargado.  
+    Con respiración lenta, calma visual y pausas, tu cuerpo vuelve naturalmente a su equilibrio.*  
+</div>
 
 <script>
-function mostrarVideo(id) {
-    document.querySelectorAll('.video-container').forEach(box => box.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-}
+    /* Mostrar videos */
+    function mostrarVideo(id) {
+        document.querySelectorAll('.video-container').forEach(v => {
+            v.style.display = 'none';
+            v.querySelector('video').pause();
+        });
 
-function iniciarTemporizador(){
-    let tiempo = 30;
-    const display = document.getElementById('timerDisplay');
+        const cont = document.getElementById(id);
+        cont.style.display = 'block';
+        cont.querySelector('video').play();
+    }
 
-    const interval = setInterval(() => {
-        tiempo--;
-        display.textContent = `00:${tiempo < 10 ? '0':''}${tiempo}`;
-        if(tiempo <= 0){ clearInterval(interval); }
-    }, 1000);
-}
+    /* Temporizador */
+    let timer;
+    function iniciarTimer(segundos) {
+        clearInterval(timer);
 
-/* Dibujo */
-const canvas = document.getElementById("canvas-dibujo");
-const ctx = canvas.getContext("2d");
-let dibujando = false;
+        let tiempo = segundos;
 
-canvas.addEventListener("mousedown", () => dibujando = true);
-canvas.addEventListener("mouseup", () => dibujando = false);
-canvas.addEventListener("mousemove", (e) => {
-    if (!dibujando) return;
-    ctx.fillStyle = "#2E5B24";
-    ctx.beginPath();
-    ctx.arc(e.offsetX, e.offsetY, 3, 0, Math.PI*2);
-    ctx.fill();
-});
+        timer = setInterval(() => {
+            let m = String(Math.floor(tiempo / 60)).padStart(2, '0');
+            let s = String(tiempo % 60).padStart(2, '0');
+            document.getElementById("timer-display").innerText = `${m}:${s}`;
+
+            if (tiempo <= 0) clearInterval(timer);
+            tiempo--;
+        }, 1000);
+    }
+    function reiniciarTimer() {
+        clearInterval(timer);
+        document.getElementById("timer-display").innerText = "00:00";
+    }
+
+    /* Canvas */
+    const canvas = document.getElementById("lienzo");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    let dibujando = false;
+
+    canvas.addEventListener("mousedown", () => dibujando = true);
+    canvas.addEventListener("mouseup", () => dibujando = false);
+    canvas.addEventListener("mousemove", e => {
+        if (!dibujando) return;
+        ctx.fillStyle = "#2E5B24";
+        ctx.beginPath();
+        ctx.arc(e.offsetX, e.offsetY, 3, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    function limpiarCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
 </script>
 
 </body>
 </html>
-
