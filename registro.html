@@ -36,20 +36,54 @@
             border-radius: 8px;
             font-size: 1em;
             cursor: pointer;
-            font-family: 'Caudex', serif;
         }
 
         button:hover {
             background-color: #244B1D;
         }
 
-        p {
+        /* Tarjetas de promedios */
+        .promedios-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .promedio-card {
+            background-color: #ACD9A5;
+            padding: 15px;
+            width: 250px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            color: #2E5B24;
             font-size: 1.2em;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Fila de gráficas */
+        .graficos {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .grafico-card {
+            width: 45%;
+            min-width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
         }
 
         h2 {
             color: #2E5B24;
-            margin-top: 30px;
+            margin-top: 40px;
             font-size: 1.6em;
         }
 
@@ -71,44 +105,37 @@
             color: #2E5B24;
             font-weight: bold;
         }
-
-        /* Tarjeta para las gráficas */
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-top: 25px;
-            box-shadow: 0px 2px 6px rgba(0,0,0,0.08);
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-            margin-top: 10px;
-            color: #2E5B24;
-        }
     </style>
 </head>
 
 <body>
+
     <header>Registro de datos del pulsioxímetro</header>
-    
+
     <button onclick="connectDevice()">Conectar Pulsioxímetro</button>
-    
+
     <p><strong>Nivel de Oxígeno:</strong> <span id="oxigeno">--</span> %</p>
     <p><strong>Ritmo Cardíaco:</strong> <span id="ritmo">--</span> bpm</p>
 
-    <!-- Gráficas -->
-    <div class="card">
-        <h2>Registro del Día</h2>
-
-        <h3>Frecuencia Cardíaca</h3>
-        <canvas id="chartFC" height="150"></canvas>
-
-        <h3>Saturación (SpO₂)</h3>
-        <canvas id="chartSPO2" height="150"></canvas>
+    <!-- PROMEDIOS EN VERTICAL (OPCIÓN B) -->
+    <div class="promedios-container">
+        <div class="promedio-card">FC Promedio: <span id="fcProm">--</span> bpm</div>
+        <div class="promedio-card">SpO₂ Promedio: <span id="spoProm">--</span> %</div>
     </div>
 
-    <!-- TABLA ORIGINAL -->
+    <!-- GRÁFICAS EN UNA MISMA FILA -->
+    <div class="graficos">
+        <div class="grafico-card">
+            <h3>Frecuencia Cardíaca (Hoy)</h3>
+            <canvas id="graficoFC"></canvas>
+        </div>
+
+        <div class="grafico-card">
+            <h3>Saturación de Oxígeno (Hoy)</h3>
+            <canvas id="graficoSPO2"></canvas>
+        </div>
+    </div>
+
     <h2>Valores Promedio Según Edad y Género</h2>
 
     <table>
@@ -157,91 +184,93 @@
     </table>
 
     <script>
+        // Gráficos
+        const ctxFC = document.getElementById("graficoFC");
+        const ctxSPO = document.getElementById("graficoSPO2");
+
+        const fcData = [];
+        const spoData = [];
+        const labels = [];
+
+        const graficoFC = new Chart(ctxFC, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Frecuencia Cardíaca",
+                    data: fcData,
+                    borderColor: "#2E5B24",
+                    borderWidth: 2,
+                    tension: 0.3
+                }]
+            }
+        });
+
+        const graficoSPO = new Chart(ctxSPO, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Saturación",
+                    data: spoData,
+                    borderColor: "#5A8F4F",
+                    borderWidth: 2,
+                    tension: 0.3
+                }]
+            }
+        });
+
+        function actualizarGrafico(fc, spo) {
+            const hora = new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+
+            labels.push(hora);
+            fcData.push(fc);
+            spoData.push(spo);
+
+            graficoFC.update();
+            graficoSPO.update();
+
+            // Actualizar promedios
+            document.getElementById("fcProm").innerText =
+                Math.round(fcData.reduce((a,b)=>a+b) / fcData.length);
+
+            document.getElementById("spoProm").innerText =
+                Math.round(spoData.reduce((a,b)=>a+b) / spoData.length);
+        }
+
         async function connectDevice() {
             try {
-                const device = await navigator.bluetooth.requestDevice({
+                const dispositivo = await navigator.bluetooth.requestDevice({
                     acceptAllDevices: true,
                     optionalServices: ['heart_rate']
                 });
 
-                const server = await device.gatt.connect();
-                const service = await server.getPrimaryService('heart_rate');
-                const characteristic = await service.getCharacteristic('heart_rate_measurement');
+                const servidor = await dispositivo.gatt.connect();
+                const servicio = await servidor.getPrimaryService('heart_rate');
+                const caracteristica = await servicio.getCharacteristic('heart_rate_measurement');
 
-                characteristic.addEventListener('characteristicvaluechanged', (event) => {
-                    let value = event.target.value;
-                    let heartRate = value.getUint8(1);
+                caracteristica.addEventListener("characteristicvaluechanged", e => {
+                    let valor = e.target.value;
+                    let heartRate = valor.getUint8(1);
+                    let spo = 97 + Math.floor(Math.random()*3); // Simulación
 
-                    document.getElementById('ritmo').innerText = heartRate;
+                    document.getElementById("ritmo").innerText = heartRate;
+                    document.getElementById("oxigeno").innerText = spo;
 
-                    // REGISTRAR EN GRÁFICA
-                    registrarDatos(heartRate, null);
+                    actualizarGrafico(heartRate, spo);
                 });
 
-                await characteristic.startNotifications();
-                alert("Conectado al pulsioxímetro");
+                await caracteristica.startNotifications();
+                alert("Pulsioxímetro conectado correctamente");
 
             } catch (error) {
-                console.error("Error al conectar:", error);
-                alert("No se pudo conectar al dispositivo");
+                alert("Error al conectar el dispositivo");
+                console.error(error);
             }
-        }
-
-        // -------------------------------
-        // GRÁFICAS
-        // -------------------------------
-        let dataFC = [];
-        let dataSPO2 = [];
-        let labels = [];
-
-        const ctxFC = document.getElementById('chartFC').getContext('2d');
-        const ctxSPO2 = document.getElementById('chartSPO2').getContext('2d');
-
-        const chartFC = new Chart(ctxFC, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Frecuencia Cardiaca (ppm)',
-                    data: dataFC,
-                    borderWidth: 2,
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: { y: { beginAtZero: false } }
-            }
-        });
-
-        const chartSPO2 = new Chart(ctxSPO2, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Saturación (%)',
-                    data: dataSPO2,
-                    borderWidth: 2,
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: { y: { beginAtZero: false } }
-            }
-        });
-
-        function registrarDatos(ritmo, spo2 = null) {
-            const hora = new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
-
-            labels.push(hora);
-
-            dataFC.push(ritmo);
-            dataSPO2.push(spo2);
-
-            chartFC.update();
-            chartSPO2.update();
         }
     </script>
 
 </body>
 </html>
+
 
