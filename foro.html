@@ -4,64 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foro de Apoyo</title>
-    <link rel="stylesheet" href="estilo.css">
+
+    <!-- Fuente Caudex -->
+    <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         html, body {
             height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
+            font-family: 'Caudex', serif;
+            background-color: #FAF9F6;
         }
+
+        header h1 {
+            text-align: center;
+            color: #2E5B24;
+            margin: 20px 0;
+            font-size: 2.2em;
+        }
+
         main {
             display: flex;
             justify-content: space-between;
             flex-grow: 1;
             padding: 0.5px 20px;
             align-items: center;
+            gap: 20px;
         }
+
+        /* CONTENEDOR MENSAJES */
         #contenedor-mensajes {
             width: 60%;
             text-align: left;
             display: flex;
             flex-direction: column;
         }
+
+        #contenedor-mensajes h2 {
+            color: #2E5B24;
+        }
+
         #lista-mensajes {
-            border: 1px solid #4B0082;
+            border: 2px solid #2E5B24;
             padding: 10px;
             min-height: 200px;
             max-height: 300px;
             overflow-y: auto;
             flex-grow: 1;
+            background: white;
+            border-radius: 10px;
         }
+
+        /* ÁREA DE TEXTO */
+        textarea {
+            width: 100%;
+            height: 70px;
+            padding: 10px;
+            resize: none;
+            border-radius: 10px;
+            border: 2px solid #2E5B24;
+            font-family: 'Caudex', serif;
+            font-size: 1em;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 12px 20px;
+            background-color: #2E5B24;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Caudex', serif;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: #23481C;
+        }
+
+        /* PANEL FRASES */
         #palabras-motivacionales {
             width: 35%;
-            background-color: #FAF9F6;
+            background-color: white;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
+            border: 2px solid #2E5B24;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            min-height: 300px;
         }
+
         #palabras-motivacionales h2 {
             font-size: 1.8em;
-            color: #4B0082;
+            color: #2E5B24;
             text-align: center;
+            margin-bottom: 15px;
         }
+
         #palabras-motivacionales p {
-            font-size: 1.2em;
+            font-size: 1.3em;
             color: #333;
             text-align: center;
+            line-height: 1.4;
         }
-        textarea {
-            width: 100%;
-            height: 60px;
-        }
+
         footer {
             text-align: center;
             padding: 10px;
             background-color: #FAF9F6;
+            font-size: 1em;
+            color: #2E5B24;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -69,22 +130,27 @@
     <header>
         <h1>Foro de Apoyo Emocional</h1>
     </header>
+
     <main>
         <div id="contenedor-mensajes">
             <h2>Mensajes</h2>
             <ul id="lista-mensajes"></ul>
+
             <h2>Comparte tu experiencia</h2>
             <textarea id="mensaje" placeholder="Escribe tu mensaje..."></textarea>
             <button onclick="publicarMensaje()">Publicar</button>
         </div>
+
         <div id="palabras-motivacionales">
-            <h2>🌸 Notas de amor para ti</h2>
+            <h2>🌿 Notas de amor para ti</h2>
             <p id="frase"></p>
         </div>
     </main>
+
     <footer>
         <p>&copy; 2025 Espacio de Calma</p>
     </footer>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             cargarMensajes();
@@ -95,7 +161,8 @@
             var mensaje = document.getElementById("mensaje").value.trim();
             const palabrasProhibidas = [
                 "suicidio", "matar", "muerte", "morir", "quitarme la vida",
-                "no quiero vivir", "me quiero morir", "acabar con todo","desaparecer","no existir"
+                "no quiero vivir", "me quiero morir", "acabar con todo",
+                "desaparecer", "no existir"
             ];
 
             const contieneProhibidas = palabrasProhibidas.some(palabra =>
@@ -140,10 +207,10 @@
                 "La calma comienza en tu interior.",
                 "Respira, todo estará bien.",
                 "No estás solo, estamos contigo.",
-                "El mundo es mejor porque tu estás en él",
-                "Confía en el proceso",
-                "Recuerda que todo lo que necesitas está dentro de ti"
-              ];
+                "El mundo es mejor porque tú estás en él.",
+                "Confía en el proceso.",
+                "Recuerda que todo lo que necesitas está dentro de ti."
+            ];
             var fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
             document.getElementById("frase").textContent = fraseAleatoria;
         }
