@@ -8,6 +8,9 @@
     <!-- Fuente Caudex -->
     <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         body {
             font-family: 'Caudex', serif;
@@ -68,8 +71,24 @@
             color: #2E5B24;
             font-weight: bold;
         }
+
+        /* Tarjeta para las gráficas */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 25px;
+            box-shadow: 0px 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            margin-top: 10px;
+            color: #2E5B24;
+        }
     </style>
 </head>
+
 <body>
     <header>Registro de datos del pulsioxímetro</header>
     
@@ -78,6 +97,18 @@
     <p><strong>Nivel de Oxígeno:</strong> <span id="oxigeno">--</span> %</p>
     <p><strong>Ritmo Cardíaco:</strong> <span id="ritmo">--</span> bpm</p>
 
+    <!-- Gráficas -->
+    <div class="card">
+        <h2>Registro del Día</h2>
+
+        <h3>Frecuencia Cardíaca</h3>
+        <canvas id="chartFC" height="150"></canvas>
+
+        <h3>Saturación (SpO₂)</h3>
+        <canvas id="chartSPO2" height="150"></canvas>
+    </div>
+
+    <!-- TABLA ORIGINAL -->
     <h2>Valores Promedio Según Edad y Género</h2>
 
     <table>
@@ -140,7 +171,11 @@
                 characteristic.addEventListener('characteristicvaluechanged', (event) => {
                     let value = event.target.value;
                     let heartRate = value.getUint8(1);
+
                     document.getElementById('ritmo').innerText = heartRate;
+
+                    // REGISTRAR EN GRÁFICA
+                    registrarDatos(heartRate, null);
                 });
 
                 await characteristic.startNotifications();
@@ -151,7 +186,62 @@
                 alert("No se pudo conectar al dispositivo");
             }
         }
+
+        // -------------------------------
+        // GRÁFICAS
+        // -------------------------------
+        let dataFC = [];
+        let dataSPO2 = [];
+        let labels = [];
+
+        const ctxFC = document.getElementById('chartFC').getContext('2d');
+        const ctxSPO2 = document.getElementById('chartSPO2').getContext('2d');
+
+        const chartFC = new Chart(ctxFC, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Frecuencia Cardiaca (ppm)',
+                    data: dataFC,
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: false } }
+            }
+        });
+
+        const chartSPO2 = new Chart(ctxSPO2, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Saturación (%)',
+                    data: dataSPO2,
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: { y: { beginAtZero: false } }
+            }
+        });
+
+        function registrarDatos(ritmo, spo2 = null) {
+            const hora = new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' });
+
+            labels.push(hora);
+
+            dataFC.push(ritmo);
+            dataSPO2.push(spo2);
+
+            chartFC.update();
+            chartSPO2.update();
+        }
     </script>
+
 </body>
 </html>
 
