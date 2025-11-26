@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Técnicas de Respiración</title>
-
-    <!-- Fuente Caudex -->
+    <title>Centro de Relajación</title>
     <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
@@ -18,204 +16,241 @@
         }
 
         header {
-            background-color: transparent;
-            padding: 20px;
             text-align: center;
+            padding: 25px;
         }
 
         header h1 {
-            margin: 0;
             font-size: 2.4em;
-            font-weight: bold;
-            color: #2E5B24;
         }
 
-        main {
+        /* CONTENEDOR GENERAL */
+        .contenedor {
             display: flex;
-            justify-content: space-around;
-            text-align: center;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
             padding: 20px;
         }
 
-        .tecnica {
-            width: 30%;
+        /* TARJETAS */
+        .tarjeta {
             background-color: #DCE5D9;
-            padding: 18px;
-            margin-bottom: 20px;
             border-radius: 12px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+            width: 300px;
+            padding: 18px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.13);
         }
 
-        .tecnica h2 {
-            color: #2E5B24;
-            font-size: 1.5em;
-            margin-top: 10px;
+        .tarjeta h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.4em;
         }
 
-        .tecnica h3 {
-            margin-top: 10px;
-            color: #244B1D;
-        }
-
-        .btn-video, .btn-info, .btn-music {
-            background-color: #2E5B24;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            margin-bottom: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            font-family: 'Caudex', serif;
-            transition: 0.3s ease;
-        }
-
-        .btn-video:hover, .btn-info:hover, .btn-music:hover {
-            background-color: #244B1D;
-        }
-
-        .video-container {
-            display: none;
-            margin-top: 10px;
-        }
-
-        video {
+        /* VIDEO */
+        .video-container video {
             width: 100%;
             border-radius: 10px;
         }
 
-        /* NUEVAS SECCIONES */
-        .info-section, .music-section {
-            width: 90%;
-            margin: 0 auto;
-            margin-top: 30px;
-            background-color: #DCE5D9;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+        /* BOTÓN GENERAL */
+        button {
+            background-color: #2E5B24;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Caudex', serif;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            background-color: #244B1D;
+        }
+
+        /* AUDIO */
+        audio { width: 100%; margin-top: 10px; }
+
+        /* TEMPORIZADOR */
+        #timerDisplay {
+            font-size: 2em;
             text-align: center;
+            margin-top: 10px;
+        }
+
+        /* DIARIO */
+        textarea {
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+            border: 2px solid #2E5B24;
+            padding: 10px;
+            font-family: 'Caudex', serif;
+        }
+
+        /* EXPRESIÓN CREATIVA */
+        canvas {
+            border: 2px solid #2E5B24;
+            border-radius: 10px;
+            width: 100%;
+            height: 250px;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1>Técnicas de Respiración</h1>
-    </header>
+<header>
+    <h1>Centro de Relajación</h1>
+</header>
 
-    <main>
-        <!-- Tus 3 técnicas existentes -->
-        <div class="tecnica">
-            <button class="btn-video" onclick="mostrarVideo('video1')">Ver Video</button>
+<div class="contenedor">
 
-            <div class="video-container" id="video1">
-                <video controls>
-                    <source src="Respiracion_Diafragma.mp4" type="video/mp4">
-                    Tu navegador no soporta el video.
-                </video>
-            </div>
+    <!-- VIDEOS RESPIRACIÓN (se integran desde tu archivo actual) -->
+    <div class="tarjeta">
+        <h2>Técnicas de Respiración</h2>
+        <p>Incluye tus tres videos completos aquí tal como los tienes.</p>
+    </div>
 
-            <h2>Respiración Diafragmática</h2>
-            <p>Favorece la oxigenación del cuerpo y activa el sistema nervioso parasimpático, reduciendo el estrés.</p>
+    <!-- ARTÍCULOS RELACIONADOS -->
+    <div class="tarjeta">
+        <h2>Artículos para Aprender Más</h2>
+        <p>Información útil sobre estrés y ansiedad.</p>
+        <a href="tu_articulo.html" style="color:#2E5B24; font-weight:bold;">Leer artículo</a>
+    </div>
 
-            <h3>¿Cómo realizarla?</h3>
-            <p>Inhala profundamente inflando el abdomen, mantén unos segundos y exhala lentamente.</p>
-        </div>
+    <!-- SONIDOS AMBIENTALES -->
+    <div class="tarjeta">
+        <h2>Sonidos Ambientales</h2>
+        <button onclick="mostrarAudio('lluvia')">🌧 Lluvia</button>
+        <audio id="lluvia" src="lluvia.mp3" controls style="display:none"></audio>
 
-        <div class="tecnica">
-            <button class="btn-video" onclick="mostrarVideo('video2')">Ver Video</button>
+        <button onclick="mostrarAudio('mar')">🌊 Mar</button>
+        <audio id="mar" src="mar.mp3" controls style="display:none"></audio>
 
-            <div class="video-container" id="video2">
-                <video controls>
-                    <source src="Respiracion_4-7-8.mp4" type="video/mp4">
-                    Tu navegador no soporta el video.
-                </video>
-            </div>
+        <button onclick="mostrarAudio('bosque')">🌿 Bosque</button>
+        <audio id="bosque" src="bosque.mp3" controls style="display:none"></audio>
+    </div>
 
-            <h2>Respiración 4-7-8</h2>
-            <p>Regula el ritmo cardíaco y promueve una relajación profunda al ralentizar la respiración.</p>
+    <!-- TEMPORIZADOR DE MEDITACIÓN -->
+    <div class="tarjeta">
+        <h2>Temporizador de Meditación</h2>
+        <button onclick="iniciarTimer(1)">1 minuto</button>
+        <button onclick="iniciarTimer(3)">3 minutos</button>
+        <button onclick="iniciarTimer(5)">5 minutos</button>
+        <div id="timerDisplay">00:00</div>
+    </div>
 
-            <h3>¿Cómo realizarla?</h3>
-            <p>Inhala en 4 segundos, sostiene 7 segundos y exhala en 8 segundos. Repite varias veces.</p>
-        </div>
+    <!-- MINI LECTURAS RELAJANTES -->
+    <div class="tarjeta">
+        <h2>Lecturas Calmantes</h2>
+        <p id="fraseRelax">Haz clic para recibir una frase.</p>
+        <button onclick="nuevaFrase()">💚 Nueva frase</button>
+    </div>
 
-        <div class="tecnica">
-            <button class="btn-video" onclick="mostrarVideo('video3')">Ver Video</button>
+    <!-- TÉCNICAS DE REGULACIÓN -->
+    <div class="tarjeta">
+        <h2>Regulación Emocional</h2>
+        <ul>
+            <li>✨ Técnica 5-4-3-2-1</li>
+            <li>❄ Técnica del hielo</li>
+            <li>🧊 Respiración para crisis</li>
+            <li>🛑 Técnica STOP</li>
+        </ul>
+    </div>
 
-            <div class="video-container" id="video3">
-                <video controls>
-                    <source src="Respiracion_Alterna.mp4" type="video/mp4">
-                    Tu navegador no soporta el video.
-                </video>
-            </div>
+    <!-- BOTÓN DE EMERGENCIA -->
+    <div class="tarjeta">
+        <h2>Emergencia Emocional</h2>
+        <button onclick="emergencia()" style="background:#b73232;">Necesito Calma Ya</button>
+        <p id="mensajeEmergencia"></p>
+    </div>
 
-            <h2>Respiración Alterna</h2>
-            <p>Equilibra los hemisferios cerebrales y mejora la concentración y el bienestar emocional.</p>
+    <!-- EXPRESIÓN CREATIVA -->
+    <div class="tarjeta">
+        <h2>Área de Expresión Creativa</h2>
+        <canvas id="canvasDibujo"></canvas>
+        <button onclick="limpiarCanvas()">Limpiar</button>
+    </div>
 
-            <h3>¿Cómo realizarla?</h3>
-            <p>Cierra una fosa nasal, inhala por la otra, cambia de lado y exhala. Alterna varias veces.</p>
-        </div>
+    <!-- DIARIO EMOCIONAL -->
+    <div class="tarjeta">
+        <h2>Diario Emocional</h2>
+        <textarea id="diario" placeholder="Escribe cómo te sientes..."></textarea>
+        <button onclick="guardarDiario()">Guardar</button>
+    </div>
+</div>
 
-        <!-- NUEVA TÉCNICA AÑADIDA -->
-        <div class="tecnica">
-            <button class="btn-video" onclick="mostrarVideo('video4')">Ver Video</button>
+<script>
+    /* SONIDOS */
+    function mostrarAudio(id) {
+        const audio = document.getElementById(id);
+        const visible = audio.style.display === 'block';
+        document.querySelectorAll('audio').forEach(a => { a.style.display='none'; a.pause(); });
+        if (!visible) audio.style.display = 'block';
+    }
 
-            <div class="video-container" id="video4">
-                <video controls>
-                    <source src="Respiracion_BoxBreathing.mp4" type="video/mp4">
-                    Tu navegador no soporta el video.
-                </video>
-            </div>
+    /* TEMPORIZADOR */
+    let tiempoRestante;
+    let intervalo;
 
-            <h2>Respiración Box Breathing (4-4-4-4)</h2>
-            <p>Ayuda a reducir la ansiedad rápida, estabiliza el ritmo cardíaco y mejora la claridad mental.</p>
+    function iniciarTimer(minutos) {
+        clearInterval(intervalo);
+        tiempoRestante = minutos * 60;
+        intervalo = setInterval(() => {
+            const min = Math.floor(tiempoRestante / 60).toString().padStart(2,'0');
+            const sec = (tiempoRestante % 60).toString().padStart(2,'0');
+            document.getElementById('timerDisplay').textContent = `${min}:${sec}`;
+            if (tiempoRestante-- <= 0) clearInterval(intervalo);
+        }, 1000);
+    }
 
-            <h3>¿Cómo realizarla?</h3>
-            <p>Inhala 4 segundos, mantén 4, exhala 4 y mantén vacío 4 segundos. Repite varias veces.</p>
-        </div>
+    /* FRASES RELAJANTES */
+    function nuevaFrase() {
+        const frases = [
+            "Respira. Este momento pasará.",
+            "La calma vuelve a ti.",
+            "No tienes que hacerlo todo hoy.",
+            "Un minuto de paz transforma tu día.",
+            "Mereces tranquilidad."
+        ];
+        const frase = frases[Math.floor(Math.random() * frases.length)];
+        document.getElementById('fraseRelax').textContent = frase;
+    }
 
-    </main>
+    /* EMERGENCIA */
+    function emergencia() {
+        document.getElementById('mensajeEmergencia').textContent =
+        "Respira conmigo: Inhala 4s... Sostén 4s... Exhala 6s. Estoy contigo.";
+    }
 
-    <!-- NUEVA SECCIÓN: INFORMACIÓN IMPORTANTE -->
-    <section class="info-section">
-        <h2>Información Importante para Reducir el Estrés</h2>
-        <p>Practicar respiración consciente, tomar pausas, hidratarte y reducir estímulos puede ayudarte a 
-        controlar la ansiedad de forma efectiva.</p>
+    /* DIBUJO */
+    const canvas = document.getElementById('canvasDibujo');
+    const ctx = canvas.getContext('2d');
+    let dibujando = false;
 
-        <button class="btn-info" onclick="window.open('articulo.html', '_blank')">
-            Más información aquí
-        </button>
-    </section>
+    canvas.addEventListener('mousedown', () => dibujando = true);
+    canvas.addEventListener('mouseup', () => dibujando = false);
+    canvas.addEventListener('mousemove', dibujar);
 
-    <!-- NUEVA SECCIÓN: MÚSICA RELAJANTE -->
-    <section class="music-section">
-        <h2>Música para Relajarte</h2>
-        <p>Reproduce esta pista para acompañar tus ejercicios o para sentir un momento de calma.</p>
+    function dibujar(e) {
+        if (!dibujando) return;
+        ctx.fillStyle = '#2E5B24';
+        ctx.fillRect(e.offsetX, e.offsetY, 4, 4);
+    }
 
-        <audio id="relaxMusic" src="relax.mp3"></audio>
+    function limpiarCanvas() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
 
-        <button class="btn-music" onclick="document.getElementById('relaxMusic').play()">
-            ▶ Reproducir Música
-        </button>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Espacio de Calma</p>
-    </footer>
-
-    <script>
-        function mostrarVideo(id) {
-            document.querySelectorAll('.video-container').forEach(container => {
-                container.style.display = 'none';
-                container.querySelector('video').pause();
-            });
-
-            const videoContainer = document.getElementById(id);
-            videoContainer.style.display = 'block';
-            videoContainer.querySelector('video').play();
-        }
-    </script>
+    /* DIARIO */
+    function guardarDiario() {
+        localStorage.setItem('diario', document.getElementById('diario').value);
+        alert("Guardado ✔");
+    }
+</script>
 
 </body>
 </html>
