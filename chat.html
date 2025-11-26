@@ -4,9 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Asistente CalmSpace</title>
+
+  <!-- Fuente Caudex -->
+  <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Caudex', serif;
       background: #f0f4f8;
       margin: 0;
       display: flex;
@@ -25,14 +29,16 @@
       display: flex;
       flex-direction: column;
       height: 80vh;
+      border: 3px solid #2E5B24;
     }
 
     .asistente-header {
-      background: #4e91f9;
+      background: #2E5B24;
       color: white;
       padding: 16px;
-      font-size: 18px;
+      font-size: 20px;
       text-align: center;
+      font-weight: 700;
     }
 
     .chat {
@@ -45,49 +51,61 @@
     .mensaje {
       margin: 10px 0;
       max-width: 80%;
-      padding: 10px;
+      padding: 12px;
       border-radius: 12px;
-      clear: both;
+      font-size: 15px;
+      line-height: 1.4;
     }
 
     .mensaje.usuario {
-      background-color: #d1e7ff;
+      background-color: #d8ecd2;
+      border: 2px solid #2E5B24;
       align-self: flex-end;
       margin-left: auto;
     }
 
     .mensaje.bot {
       background-color: #fff;
-      border: 1px solid #ccc;
+      border: 2px solid #cccccc;
       margin-right: auto;
     }
 
     .input-area {
       display: flex;
-      border-top: 1px solid #ccc;
+      border-top: 2px solid #2E5B24;
     }
 
     .input-area input {
       flex: 1;
       border: none;
       padding: 12px;
-      font-size: 14px;
+      font-size: 15px;
       outline: none;
+      font-family: 'Caudex', serif;
     }
 
     .input-area button {
       padding: 12px 20px;
-      background-color: #4e91f9;
+      background-color: #2E5B24;
       color: white;
       border: none;
       cursor: pointer;
+      font-family: 'Caudex', serif;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .input-area button:hover {
+      background-color: #24471B;
     }
   </style>
 </head>
 <body>
   <div class="asistente-container">
     <div class="asistente-header">Asistente CalmSpace</div>
+
     <div class="chat" id="chat"></div>
+
     <div class="input-area">
       <input type="text" id="userInput" placeholder="Escribe tu mensaje..." />
       <button onclick="enviarMensaje()">Enviar</button>
@@ -105,7 +123,6 @@
       agregarMensaje(texto, "usuario");
       input.value = "";
 
-      // Simula una respuesta del asistente
       setTimeout(() => {
         const respuesta = obtenerRespuesta(texto);
         agregarMensaje(respuesta, "bot");
@@ -123,20 +140,20 @@
     function obtenerRespuesta(input) {
       const texto = input.toLowerCase();
 
-       if (texto.includes("Hola") || texto.includes("Necesito ayuda")|| texto.includes("hola")) {
-        return "Bienvenido a Calmspace, todo estará bien, cuentame como te puedo ayudar";
+      if (texto.includes("hola") || texto.includes("necesito ayuda")) {
+        return "Bienvenido a CalmSpace, todo estará bien. Cuéntame, ¿cómo puedo ayudarte?";
       }
-      if (texto.includes("tengo ansiedad") || texto.includes("ayuda")|| texto.includes("estres")|| texto.includes("tengo un episodio de ansiedad")|| texto.includes("tengo un episodio de estres")) {
-        return "Estoy aquí contigo. ¿Te gustaría hacer una técnica de respiración guiada?";
+      if (texto.includes("ansiedad") || texto.includes("ayuda") || texto.includes("estrés")) {
+        return "Estoy contigo. ¿Te gustaría hacer una técnica de respiración guiada?";
       }
-      if (texto.includes("si") || texto.includes("dale")|| texto.includes("esta bien")|| texto.includes("por favor")) {
-        return "Muy bien, empecemos. Inhalamos por 4 segundos... sostenemos por 7... exhalamos por 8. ¡Repite conmigo!";
+      if (texto.includes("sí") || texto.includes("dale") || texto.includes("por favor")) {
+        return "Perfecto. Respira conmigo: Inhala 4 segundos... sostiene 7... exhala 8.";
       }
-      if (texto.includes("gracias")|| texto.includes("estoy mejor")|| texto.includes("bien")) {
-        return "¡Siempre que me necesites, estoy aquí! 💙";
+      if (texto.includes("gracias") || texto.includes("mejor")) {
+        return "Me alegra mucho saberlo 💚. Siempre estaré aquí para ti.";
       }
 
-      return "No estoy seguro de cómo ayudarte con eso, pero estoy aquí para ti.";
+      return "No estoy seguro de cómo ayudarte con eso, pero estoy aquí para acompañarte 💚.";
     }
   </script>
 </body>
