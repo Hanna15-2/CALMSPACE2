@@ -1,337 +1,544 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro de Relajación</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Centro de Relajación — Técnicas</title>
 
-    <!-- Fuente Caudex -->
-    <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Fuente Caudex -->
+  <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Caudex', serif;
-            background-color: #F4F7F2;
-            margin: 0;
-            padding: 0;
-            color: #2E5B24;
-        }
-
-        header {
-            text-align: center;
-            padding: 20px;
-        }
-
-        header h1 {
-            font-size: 2.4em;
-            margin: 0;
-        }
-
-        /* Grid de 2x2 para videos */
-        .videos-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            padding: 20px;
-            width: 90%;
-            margin: auto;
-        }
-
-        .tecnica {
-            background-color: #DCE5D9;
-            padding: 18px;
-            border-radius: 14px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-
-        .btn-video {
-            background-color: #2E5B24;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 12px;
-            transition: 0.3s ease;
-        }
-        .btn-video:hover {
-            background-color: #244B1D;
-        }
-
-        .video-container {
-            display: none;
-            margin-top: 10px;
-        }
-
-        video {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        /* Minilecturas – Post-it */
-        .postit {
-            background-color: #FFF7A8;
-            width: 260px;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            font-size: 1.1em;
-            position: absolute;
-            right: 20px;
-            top: 160px;
-        }
-
-        /* Botón de emergencia */
-        .boton-emergencia {
-            background-color: #C62828;
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            cursor: pointer;
-            position: absolute;
-            right: 20px;
-            top: 420px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-            transition: .3s ease;
-        }
-        .boton-emergencia:hover {
-            background-color: #8A1C1C;
-        }
-
-        /* Área de expresión creativa */
-        .drawing-area {
-            width: 90%;
-            margin: 40px auto;
-            background: #E7EEE4;
-            padding: 20px;
-            border-radius: 14px;
-        }
-
-        #lienzo {
-            width: 100%;
-            height: 250px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-            cursor: crosshair;
-        }
-
-        .btn-limpiar {
-            background-color: #2E5B24;
-            color: white;
-            margin-top: 10px;
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            border: none;
-        }
-
-        /* Temporizador */
-        .timer-box {
-            width: 90%;
-            margin: 20px auto;
-            background-color: #DCE5D9;
-            padding: 20px;
-            border-radius: 14px;
-            text-align: center;
-        }
-
-        .timer-btn {
-            background-color: #2E5B24;
-            color: white;
-            padding: 10px 14px;
-            border: none;
-            margin: 6px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        #timer-display {
-            font-size: 2em;
-            margin-top: 10px;
-        }
-
-        /* Información importante */
-        .info-box {
-            background-color: #FFF0D1;
-            width: 90%;
-            margin: 25px auto;
-            padding: 20px;
-            border-radius: 14px;
-            text-align: center;
-            font-size: 1.2em;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-    </style>
-</head>
-
-<body>
-
-<header>
-    <h1>Centro de Relajación</h1>
-</header>
-
-<!-- MINILECTURAS -->
-<div class="postit">
-    <strong>Mini-Lecturas Relajantes</strong><br><br>
-    🌿 *Respira… tu cuerpo sabe volver al equilibrio.*<br><br>
-    ✨ *Eres más fuerte que este instante difícil.*<br><br>
-    💛 *La calma no llega sola, tú la construyes poco a poco.*
-</div>
-
-<!-- BOTÓN DE EMERGENCIA -->
-<button class="boton-emergencia">⚠ Emergencia Emocional</button>
-
-<!-- VIDEOS 2x2 -->
-<div class="videos-grid">
-
-    <!-- 1 -->
-    <div class="tecnica">
-        <button class="btn-video" onclick="mostrarVideo('v1')">Ver Video</button>
-        <div id="v1" class="video-container">
-            <video controls>
-                <source src="Respiracion_Diafragma.mp4">
-            </video>
-        </div>
-        <h2>Respiración Diafragmática</h2>
-        <p>Activa el sistema nervioso parasimpático y relaja todo el cuerpo.</p>
-        <h3>¿Cómo hacerla?</h3>
-        <p>Inhala inflando abdomen, retén y exhala lento.</p>
-    </div>
-
-    <!-- 2 -->
-    <div class="tecnica">
-        <button class="btn-video" onclick="mostrarVideo('v2')">Ver Video</button>
-        <div id="v2" class="video-container">
-            <video controls>
-                <source src="Respiracion_4-7-8.mp4">
-            </video>
-        </div>
-        <h2>Respiración 4-7-8</h2>
-        <p>Reduce el ritmo cardíaco y genera calma profunda.</p>
-        <h3>¿Cómo hacerla?</h3>
-        <p>Inhala 4s, sostén 7s, exhala 8s.</p>
-    </div>
-
-    <!-- 3 -->
-    <div class="tecnica">
-        <button class="btn-video" onclick="mostrarVideo('v3')">Ver Video</button>
-        <div id="v3" class="video-container">
-            <video controls>
-                <source src="Respiracion_Alterna.mp4">
-            </video>
-        </div>
-        <h2>Respiración Alterna</h2>
-        <p>Equilibra los hemisferios y mejora la concentración.</p>
-        <h3>¿Cómo hacerla?</h3>
-        <p>Cierra una fosa, inhala, cambia y exhala.</p>
-    </div>
-
-    <!-- 4 -->
-    <div class="tecnica">
-        <button class="btn-video" onclick="mostrarVideo('v4')">Ver Video</button>
-        <div id="v4" class="video-container">
-            <video controls>
-                <source src="Respiracion_Box.mp4">
-            </video>
-        </div>
-        <h2>Respiración en Caja (4-4-4-4)</h2>
-        <p>Ideal para cortar crisis y estabilizar.</p>
-        <h3>¿Cómo hacerla?</h3>
-        <p>Inhala 4s, sostén 4s, exhala 4s, pausa 4s.</p>
-    </div>
-
-</div>
-
-<!-- TEMPORIZADOR -->
-<div class="timer-box">
-    <h2>Temporizador de Meditación</h2>
-
-    <button class="timer-btn" onclick="iniciarTimer(60)">1 min</button>
-    <button class="timer-btn" onclick="iniciarTimer(180)">3 min</button>
-    <button class="timer-btn" onclick="iniciarTimer(300)">5 min</button>
-    <button class="timer-btn" onclick="iniciarTimer(600)">10 min</button>
-    <button class="timer-btn" onclick="reiniciarTimer()">Reiniciar</button>
-
-    <div id="timer-display">00:00</div>
-</div>
-
-<!-- ÁREA CREATIVA -->
-<div class="drawing-area">
-    <h2>Área de Expresión Creativa</h2>
-    <canvas id="lienzo"></canvas>
-    <button class="btn-limpiar" onclick="limpiarCanvas()">Limpiar</button>
-</div>
-
-<!-- INFORMACIÓN IMPORTANTE -->
-<div class="info-box">
-    <strong>Información importante</strong><br><br>
-    Respirar lento, hidratarte y tomar descansos ayuda a regular la ansiedad.<br><br>
-
-    ⭐ **Recuerda esto:**  
-    *Tu sistema nervioso NO está roto, solo está sobrecargado.  
-    Con respiración lenta, calma visual y pausas, tu cuerpo vuelve naturalmente a su equilibrio.*  
-</div>
-
-<script>
-    /* Mostrar videos */
-    function mostrarVideo(id) {
-        document.querySelectorAll('.video-container').forEach(v => {
-            v.style.display = 'none';
-            v.querySelector('video').pause();
-        });
-
-        const cont = document.getElementById(id);
-        cont.style.display = 'block';
-        cont.querySelector('video').play();
+  <style>
+    :root{
+      --verde:#2E5B24;
+      --verde-claro:#ACD9A5;
+      --postit:#FFF7A8;
+      --rojo:#C62828;
+      --card:#DCE5D9;
     }
+
+    *{box-sizing:border-box}
+    body{
+      font-family:'Caudex',serif;
+      margin:0;
+      background:#F4F7F2;
+      color:var(--verde);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    header{
+      text-align:center;
+      padding:22px 16px;
+    }
+    header h1{ margin:0; font-size:2.2rem; }
+
+    /* TOP ROW: post-it + emergency */
+    .top-row{
+      width:90%;
+      max-width:1100px;
+      margin: 0 auto;
+      display:flex;
+      gap:20px;
+      align-items:flex-start;
+      justify-content:space-between;
+      padding: 0 10px;
+    }
+
+    .postit{
+      background:var(--postit);
+      width: calc(100% - 160px);
+      max-width:760px;
+      padding:18px;
+      border-radius:8px;
+      box-shadow: 6px 6px 0 rgba(203,191,142,0.35);
+      transform: rotate(-1deg);
+      font-size:1.05rem;
+      line-height:1.4;
+    }
+    .postit strong{display:block; margin-bottom:8px; color:#5a4a00;}
+
+    .emergency-card{
+      width:150px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:12px;
+    }
+    .emergency-btn{
+      background:var(--rojo);
+      color:white;
+      border:none;
+      padding:12px 14px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+      width:140px;
+    }
+    .emergency-btn:hover{ background:#A31E1E; }
+
+    /* VIDEOS 2x2 */
+    .videos-grid{
+      width:90%;
+      max-width:1100px;
+      margin:24px auto 6px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:22px;
+      padding:0 10px;
+    }
+    .tecnica{
+      background:var(--card);
+      border-radius:12px;
+      padding:16px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      text-align:left;
+    }
+    .tecnica h2{ color:var(--verde); margin:6px 0; font-size:1.15rem;}
+    .tecnica p{ margin:6px 0 10px; color:#274b2b; }
+    .tecnica .btn-video{
+      background:var(--verde);
+      color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer;
+    }
+    .tecnica .btn-video:hover{ background:#244B1D; }
+
+    .video-container{ display:none; margin-top:10px; }
+    .video-container video{ width:100%; border-radius:8px; display:block; }
+
+    /* Información importante */
+    .info-box{
+      width:90%;
+      max-width:1100px;
+      margin:26px auto;
+      background:#FFF0D1;
+      padding:18px;
+      border-radius:10px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.06);
+      text-align:center;
+    }
+    .info-box p{ font-size:1.05rem; margin:12px 0; line-height:1.5; }
+    .info-box .more{ display:none; margin-top:10px; color:#213a1d; text-align:left; max-width:900px; margin-left:auto; margin-right:auto; }
+
+    .link-btn{
+      background:var(--verde);
+      color:white;
+      border:none;
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    /* Sonidos */
+    .sounds{
+      width:90%;
+      max-width:1100px;
+      margin:18px auto;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      padding:0 10px;
+    }
+    .sound-card{
+      background:var(--card);
+      padding:12px;
+      border-radius:10px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      box-shadow:0 2px 6px rgba(0,0,0,0.06);
+    }
+    .sound-card button{ background:transparent; border:1px solid var(--verde); color:var(--verde); padding:6px 10px; border-radius:8px; cursor:pointer; }
+    .sound-card button.playing{ background:var(--verde); color:white; border-color:var(--verde); }
 
     /* Temporizador */
-    let timer;
-    function iniciarTimer(segundos) {
-        clearInterval(timer);
-
-        let tiempo = segundos;
-
-        timer = setInterval(() => {
-            let m = String(Math.floor(tiempo / 60)).padStart(2, '0');
-            let s = String(tiempo % 60).padStart(2, '0');
-            document.getElementById("timer-display").innerText = `${m}:${s}`;
-
-            if (tiempo <= 0) clearInterval(timer);
-            tiempo--;
-        }, 1000);
+    .timer-box{
+      width:90%;
+      max-width:1100px;
+      margin:18px auto;
+      background:var(--card);
+      padding:14px;
+      border-radius:10px;
+      text-align:center;
     }
-    function reiniciarTimer() {
-        clearInterval(timer);
-        document.getElementById("timer-display").innerText = "00:00";
+    .timer-buttons{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:10px; }
+    .timer-buttons button{ background:var(--verde); color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+    .timer-display{ font-size:2rem; font-weight:700; margin-top:6px; }
+
+    /* Expresión creativa */
+    .creative{
+      width:90%;
+      max-width:1100px;
+      margin:18px auto;
+      background:#E7EEE4;
+      padding:14px;
+      border-radius:10px;
+      text-align:center;
     }
+    #canvas{ width:100%; height:260px; background:#fff; border-radius:8px; border:2px solid var(--verde); cursor:crosshair; display:block; }
 
-    /* Canvas */
-    const canvas = document.getElementById("lienzo");
-    const ctx = canvas.getContext("2d");
+    .btn-clear{ margin-top:10px; background:var(--verde); color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
 
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    /* Diario emocional */
+    .diary{
+      width:90%;
+      max-width:1100px;
+      margin:18px auto 50px;
+      background:var(--card);
+      padding:14px;
+      border-radius:10px;
+    }
+    .diary textarea{ width:100%; min-height:120px; padding:10px; border-radius:8px; border:2px solid #2b4d28; font-family:inherit; }
+    .diary .row{ display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; align-items:center; }
+    .diary button{ background:var(--verde); color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+    .entries{ margin-top:12px; }
+    .entry{ background:white; padding:10px; border-radius:8px; margin-bottom:8px; box-shadow:0 2px 4px rgba(0,0,0,0.06); display:flex; justify-content:space-between; gap:8px; align-items:flex-start; }
 
-    let dibujando = false;
+    /* Responsive */
+    @media (max-width:900px){
+      .videos-grid{ grid-template-columns:1fr; }
+      .top-row{ flex-direction:column; align-items:stretch; gap:12px; }
+      .postit{ width:100%; transform:none; }
+      .emergency-card{ width:100%; align-items:flex-start; }
+      .emergency-btn{ width:100%; }
+      .postit{ order:1 } .emergency-card{ order:2 }
+      .postit, .emergency-card{ position:static; box-shadow: 4px 4px 0 rgba(203,191,142,0.25); }
+    }
+  </style>
+</head>
+<body>
 
-    canvas.addEventListener("mousedown", () => dibujando = true);
-    canvas.addEventListener("mouseup", () => dibujando = false);
-    canvas.addEventListener("mousemove", e => {
-        if (!dibujando) return;
-        ctx.fillStyle = "#2E5B24";
-        ctx.beginPath();
-        ctx.arc(e.offsetX, e.offsetY, 3, 0, Math.PI * 2);
-        ctx.fill();
+  <header>
+    <h1>Centro de Relajación</h1>
+  </header>
+
+  <!-- TOP: postit + emergency -->
+  <div class="top-row" role="region" aria-label="Lecturas y emergencia">
+    <div class="postit" aria-live="polite">
+      <strong>Mini-lecturas relajantes</strong>
+      <div>🌿 <em>Respira… tu cuerpo sabe volver al equilibrio.</em></div>
+      <div style="height:8px"></div>
+      <div>✨ <em>Eres más fuerte que este instante difícil.</em></div>
+      <div style="height:8px"></div>
+      <div>💛 <em>La calma se construye en pequeños pasos.</em></div>
+    </div>
+
+    <div class="emergency-card">
+      <div style="font-size:0.95rem; color:#6b1f1f; font-weight:700; margin-bottom:6px;">Emergencia</div>
+      <button class="emergency-btn" id="emergencyBtn" title="Solicitar ayuda ahora">⚠ Necesito ayuda ahora</button>
+      <small style="display:block; margin-top:8px; color:#5a3a3a; text-align:center;">Puedes pulsar para ver recursos</small>
+    </div>
+  </div>
+
+  <!-- VIDEOS 2x2 -->
+  <section class="videos-grid" aria-label="Técnicas de respiración">
+    <article class="tecnica" aria-labelledby="t1">
+      <div style="display:flex;gap:8px;justify-content:flex-end;"><button class="btn-video" onclick="toggleVideo('v1')">Ver video</button></div>
+      <div id="v1" class="video-container"><video controls preload="none"><source src="Respiracion_Diafragma.mp4" type="video/mp4"></video></div>
+      <h2 id="t1">Respiración Diafragmática</h2>
+      <p>Activa el sistema nervioso parasimpático, reduce tensión y calma.</p>
+      <h3>Cómo</h3><p>Coloca mano en abdomen, inhala profundo, mantiene y exhala lentamente.</p>
+    </article>
+
+    <article class="tecnica" aria-labelledby="t2">
+      <div style="display:flex;gap:8px;justify-content:flex-end;"><button class="btn-video" onclick="toggleVideo('v2')">Ver video</button></div>
+      <div id="v2" class="video-container"><video controls preload="none"><source src="Respiracion_4-7-8.mp4" type="video/mp4"></video></div>
+      <h2 id="t2">Respiración 4-7-8</h2>
+      <p>Reduce el ritmo cardíaco y ayuda a conciliar el sueño.</p>
+      <h3>Cómo</h3><p>Inhala 4s - sostiene 7s - exhala 8s. Repetir 4 ciclos.</p>
+    </article>
+
+    <article class="tecnica" aria-labelledby="t3">
+      <div style="display:flex;gap:8px;justify-content:flex-end;"><button class="btn-video" onclick="toggleVideo('v3')">Ver video</button></div>
+      <div id="v3" class="video-container"><video controls preload="none"><source src="Respiracion_Alterna.mp4" type="video/mp4"></video></div>
+      <h2 id="t3">Respiración Alterna</h2>
+      <p>Equilibra hemisferios y calma la mente.</p>
+      <h3>Cómo</h3><p>Cierra una fosa, inhala por la otra, cambia y exhala.</p>
+    </article>
+
+    <article class="tecnica" aria-labelledby="t4">
+      <div style="display:flex;gap:8px;justify-content:flex-end;"><button class="btn-video" onclick="toggleVideo('v4')">Ver video</button></div>
+      <div id="v4" class="video-container"><video controls preload="none"><source src="Respiracion_Box.mp4" type="video/mp4"></video></div>
+      <h2 id="t4">Box Breathing (4-4-4-4)</h2>
+      <p>Estabiliza la respiración para cortar picos de ansiedad.</p>
+      <h3>Cómo</h3><p>Inhala 4s - sostén 4s - exhala 4s - pausa 4s. Repetir.</p>
+    </article>
+  </section>
+
+  <!-- INFORMACIÓN IMPORTANTE -->
+  <div class="info-box" role="region" aria-label="Información importante">
+    <h2>Información importante</h2>
+    <p>
+      Cuando respiras lento y consciente, tu cuerpo recibe la orden de "relajarse": baja la adrenalina,
+      disminuye la tensión muscular y tu mente recupera claridad. <strong>Tu respiración es la herramienta más accesible
+      para volver al equilibrio en segundos.</strong>
+    </p>
+
+    <button class="link-btn" id="moreBtn">Más información aquí</button>
+
+    <div class="more" id="moreText">
+      <p>
+        Tips prácticos: desconéctate 2 minutos de pantallas, bebe un vaso de agua tibia,
+        baja el ritmo de tus pensamientos enfocándote en la exhalación (hacia afuera).
+        Si la ansiedad es intensa y sostenida, busca acompañamiento profesional.
+      </p>
+    </div>
+  </div>
+
+  <!-- SONIDOS AMBIENTALES -->
+  <div class="sounds" role="region" aria-label="Sonidos ambientales">
+    <div class="sound-card">
+      <div>🌧 Lluvia</div>
+      <button data-track="lluvia">▶</button>
+      <audio id="lluvia" src="lluvia.mp3" preload="none"></audio>
+    </div>
+
+    <div class="sound-card">
+      <div>🌊 Mar</div>
+      <button data-track="mar">▶</button>
+      <audio id="mar" src="mar.mp3" preload="none"></audio>
+    </div>
+
+    <div class="sound-card">
+      <div>🌲 Bosque</div>
+      <button data-track="bosque">▶</button>
+      <audio id="bosque" src="bosque.mp3" preload="none"></audio>
+    </div>
+
+    <div class="sound-card">
+      <div>🌙 Noche</div>
+      <button data-track="noche">▶</button>
+      <audio id="noche" src="noche.mp3" preload="none"></audio>
+    </div>
+  </div>
+
+  <!-- TEMPORIZADOR -->
+  <div class="timer-box" role="region" aria-label="Temporizador de meditación">
+    <h2>Temporizador de meditación</h2>
+    <div class="timer-buttons">
+      <button onclick="startTimer(60)">1 min</button>
+      <button onclick="startTimer(180)">3 min</button>
+      <button onclick="startTimer(300)">5 min</button>
+      <button onclick="startTimer(600)">10 min</button>
+      <button onclick="resetTimer()">Reiniciar</button>
+    </div>
+    <div id="timer-display" class="timer-display">00:00</div>
+  </div>
+
+  <!-- EXPRESIÓN CREATIVA -->
+  <div class="creative" role="region" aria-label="Expresion creativa">
+    <h2>Área de expresión creativa</h2>
+    <p>Dibuja libremente para soltar lo que sientes.</p>
+    <canvas id="canvas"></canvas>
+    <div style="margin-top:8px;"><button class="btn-clear" id="clearCanvasBtn">Limpiar</button></div>
+  </div>
+
+  <!-- DIARIO EMOCIONAL -->
+  <div class="diary" role="region" aria-label="Diario emocional">
+    <h2>Diario emocional</h2>
+    <textarea id="diaryInput" placeholder="Escribe cómo te sientes ahora..."></textarea>
+    <div class="row">
+      <button id="saveDiary">Guardar entrada</button>
+      <button id="clearAllDiary" style="background:#a33; color:white; border:none; padding:8px 12px; border-radius:8px;">Borrar todo</button>
+    </div>
+
+    <div class="entries" id="entries"></div>
+  </div>
+
+<script>
+  /* ------------- VIDEO toggle ------------- */
+  function toggleVideo(id){
+    // hide others
+    document.querySelectorAll('.video-container').forEach(c=>{
+      if(c.id !== id){ 
+        c.style.display='none';
+        const v = c.querySelector('video'); if(v){ v.pause(); v.currentTime=0; }
+      }
     });
-
-    function limpiarCanvas() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cont = document.getElementById(id);
+    if(!cont) return;
+    if(cont.style.display === 'block'){
+      cont.style.display='none';
+      const v = cont.querySelector('video'); if(v){ v.pause(); v.currentTime=0; }
+    } else {
+      cont.style.display='block';
+      const v = cont.querySelector('video'); if(v){ v.play(); }
+      // pause any playing audio tracks
+      stopAllSounds();
     }
-</script>
+  }
 
+  /* ------------- INFO expand ------------- */
+  document.getElementById('moreBtn').addEventListener('click', ()=>{
+    const more = document.getElementById('moreText');
+    more.style.display = more.style.display === 'block' ? 'none' : 'block';
+  });
+
+  /* ------------- SOUNDS ------------- */
+  const soundButtons = document.querySelectorAll('.sound-card button');
+  soundButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const trackId = btn.getAttribute('data-track');
+      const audio = document.getElementById(trackId);
+      if(!audio) return;
+      if(audio.paused){
+        stopAllSounds();
+        audio.play();
+        btn.classList.add('playing');
+        btn.textContent = '⏸';
+      } else {
+        audio.pause();
+        btn.classList.remove('playing');
+        btn.textContent = '▶';
+      }
+      // when a track ends, reset button
+      audio.onended = () => { btn.classList.remove('playing'); btn.textContent='▶'; }
+    });
+  });
+
+  function stopAllSounds(){
+    soundButtons.forEach(b=>{
+      const id = b.getAttribute('data-track');
+      const a = document.getElementById(id);
+      if(a){ a.pause(); a.currentTime = 0; }
+      b.classList.remove('playing'); b.textContent = '▶';
+    });
+  }
+
+  /* ------------- TIMER ------------- */
+  let timerInterval = null;
+  function startTimer(seconds){
+    clearInterval(timerInterval);
+    let remaining = seconds;
+    updateTimerDisplay(remaining);
+    timerInterval = setInterval(()=>{
+      remaining--;
+      if(remaining < 0){ clearInterval(timerInterval); updateTimerDisplay(0); return; }
+      updateTimerDisplay(remaining);
+    }, 1000);
+  }
+  function resetTimer(){
+    clearInterval(timerInterval);
+    updateTimerDisplay(0);
+  }
+  function updateTimerDisplay(sec){
+    const m = String(Math.floor(sec/60)).padStart(2,'0');
+    const s = String(sec%60).padStart(2,'0');
+    document.getElementById('timer-display').textContent = `${m}:${s}`;
+  }
+
+  /* ------------- CANVAS DRAW ------------- */
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+
+  function resizeCanvas(){
+    const rect = canvas.getBoundingClientRect();
+    // preserve current drawing by copying to temp canvas
+    const tmp = document.createElement('canvas');
+    tmp.width = canvas.width;
+    tmp.height = canvas.height;
+    tmp.getContext('2d').drawImage(canvas,0,0);
+
+    canvas.width = Math.floor(rect.width);
+    canvas.height = Math.floor(rect.height);
+    // restore
+    ctx.drawImage(tmp, 0, 0, canvas.width, canvas.height);
+  }
+  // initial size
+  window.addEventListener('load', resizeCanvas);
+  window.addEventListener('resize', resizeCanvas);
+
+  let drawing=false;
+  canvas.addEventListener('pointerdown', ()=> drawing=true);
+  canvas.addEventListener('pointerup', ()=> drawing=false);
+  canvas.addEventListener('pointerout', ()=> drawing=false);
+  canvas.addEventListener('pointermove', (e)=>{
+    if(!drawing) return;
+    const r = canvas.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    ctx.fillStyle = '#2E5B24';
+    ctx.beginPath();
+    ctx.arc(x,y,3,0,Math.PI*2);
+    ctx.fill();
+  });
+
+  document.getElementById('clearCanvasBtn').addEventListener('click', ()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+  });
+
+  /* ------------- DIARIO (localStorage) ------------- */
+  const diaryInput = document.getElementById('diaryInput');
+  const entriesDiv = document.getElementById('entries');
+
+  function loadEntries(){
+    const data = JSON.parse(localStorage.getItem('calm_entries')||'[]');
+    entriesDiv.innerHTML = '';
+    data.reverse().forEach((e,i)=>{
+      const el = document.createElement('div');
+      el.className='entry';
+      const left = document.createElement('div');
+      left.innerHTML = `<div style="font-size:0.9rem;color:#666">${e.date}</div><div style="margin-top:6px">${escapeHtml(e.text)}</div>`;
+      const right = document.createElement('div');
+      const del = document.createElement('button');
+      del.textContent='Eliminar';
+      del.style.background='#a33'; del.style.color='white'; del.style.border='none'; del.style.padding='6px 8px'; del.style.borderRadius='6px'; del.style.cursor='pointer';
+      del.addEventListener('click', ()=>{
+        removeEntry(data.length - 1 - i); // because reversed
+      });
+      right.appendChild(del);
+      el.appendChild(left);
+      el.appendChild(right);
+      entriesDiv.appendChild(el);
+    });
+  }
+
+  function saveEntry(){
+    const text = diaryInput.value.trim();
+    if(!text) return alert('Escribe algo primero');
+    const data = JSON.parse(localStorage.getItem('calm_entries')||'[]');
+    data.push({ text, date: new Date().toLocaleString() });
+    localStorage.setItem('calm_entries', JSON.stringify(data));
+    diaryInput.value='';
+    loadEntries();
+  }
+
+  function removeEntry(index){
+    const data = JSON.parse(localStorage.getItem('calm_entries')||'[]');
+    data.splice(index,1);
+    localStorage.setItem('calm_entries', JSON.stringify(data));
+    loadEntries();
+  }
+
+  function clearAllEntries(){
+    if(!confirm('Borrar todas las entradas del diario?')) return;
+    localStorage.removeItem('calm_entries');
+    loadEntries();
+  }
+
+  document.getElementById('saveDiary').addEventListener('click', saveEntry);
+  document.getElementById('clearAllDiary').addEventListener('click', clearAllEntries);
+
+  // init
+  loadEntries();
+
+  /* ------------- EMERGENCY button action ------------- */
+  document.getElementById('emergencyBtn').addEventListener('click', ()=>{
+    // Open a modal or navigate — here we show quick resources inline
+    // Simple inline behavior:
+    const info = [
+      'Si estás en Colombia llama 123 (Emergencias).',
+      'Línea de apoyo emocional: 106 (o el número local disponible).',
+      'Si tienes intención de hacerte daño, busca ayuda profesional inmediatamente.'
+    ];
+    alert('Recursos rápidos:\\n\\n' + info.join('\\n\\n'));
+  });
+
+  /* util */
+  function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+</script>
 </body>
 </html>
+
