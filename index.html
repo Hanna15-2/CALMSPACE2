@@ -3,59 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calm Space</title>
+    <title>MentalHealth</title>
     <link rel="stylesheet" href="estilo.css">
     <style>
         body {
             background-color: #FAF9F6;
             text-align: center;
+            font-family: Arial, sans-serif;
         }
+
         .logo {
             margin-top: 20px;
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 400px;
+            width: 550px;
         }
+
+        /* MENU VERTICAL */
         .menu {
             display: flex;
+            flex-direction: column;  
             justify-content: center;
-            gap: 144px;
-            margin-top: 40px;
             align-items: center;
+            gap: 25px;
+            margin-top: 40px;
         }
+
         .menu a {
             text-decoration: none;
             font-size: 1.5em;
-            color: #4B0082;
+            color: #2E5B24;
             font-weight: bold;
-            padding: 15px 20px;
-            border: 3px solid #4B0082;
-            border-radius: 10px;
+            padding: 15px 40px;
+            border: 3px solid #ACD9A5;
+            background-color: #ACD9A5;
+            border-radius: 12px;
+            transition: 0.3s;
+            width: 250px;
+            text-align: center;
         }
+
+        .menu a:hover {
+            background-color: #97C68A;
+        }
+
+        /* Emergencias */
         .emergency {
-            margin-top: 85px;
+            margin-top: 50px;
             font-size: 1em;
             color: black;
         }
-        .emergency p {
-            display: inline;
-            margin: 0 15px;
-            font-weight: bold;
-        }
+
         .emergency a {
-            color: #4B0082;
+            color: #2E5B24;
             text-decoration: none;
             font-weight: bold;
         }
 
-        /* Estilos del chatbot */
+        /* Botón del chatbot */
         #chatBotToggle {
             position: fixed;
             bottom: 1in;
             right: 1in;
-            background-color: #4B0082;
-            color: white;
+            background-color: #ACD9A5;
+            color: #2E5B24;
             border: none;
             border-radius: 50%;
             width: 60px;
@@ -64,8 +76,10 @@
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             z-index: 999;
+            font-weight: bold;
         }
 
+        /* Ventana del chatbot */
         #chatBotWindow {
             position: fixed;
             bottom: 1.2in;
@@ -78,6 +92,7 @@
             display: none;
             overflow: hidden;
             z-index: 998;
+            border: 3px solid #ACD9A5;
         }
 
         #chatBotWindow iframe {
@@ -94,30 +109,33 @@
             border: none;
             font-size: 20px;
             cursor: pointer;
-            z-index: 1000;
-            color: white;
+            color: #2E5B24;
+            font-weight: bold;
         }
     </style>
 </head>
+
 <body>
     <img class="logo" src="image.png" alt="Logo CalmSpace">
-    
+
+    <!-- MENU VERTICAL -->
     <div class="menu">
         <a href="registro.html">Registro de Datos</a>
         <a href="tecnicas.html">Técnicas de Respiración</a>
         <a href="foro.html">Foro de Apoyo</a>
     </div>
-    
-    <div class="emergency" style="position: relative; bottom: -35px;">
+
+    <div class="emergency">
         <h3>Números de Emergencia en Colombia</h3>
         <p><strong>Emergencias generales: 123</strong></p>
-        <p><strong>Línea de ayuda psicológica: <a href="linea_psicológica.pdf" target="_blank">Ver aquí</a></strong></p>
+        <p><strong>Línea de ayuda psicológica: 
+            <a href="linea_psicológica.pdf" target="_blank">Ver aquí</a></strong></p>
     </div>
 
     <!-- Botón flotante del chatbot -->
     <button id="chatBotToggle">💬</button>
 
-    <!-- Ventana flotante con iframe del chatbot -->
+    <!-- Ventana flotante del chatbot -->
     <div id="chatBotWindow">
         <button id="closeChatBtn" title="Cerrar">✖</button>
         <iframe src="chat.html"></iframe>
@@ -129,12 +147,15 @@
         const closeBtn = document.getElementById("closeChatBtn");
 
         toggleBtn.addEventListener("click", () => {
-            chatWindow.style.display = chatWindow.style.display === "block" ? "none" : "block";
+            chatWindow.style.display = 
+                chatWindow.style.display === "block" ? "none" : "block";
         });
 
         closeBtn.addEventListener("click", () => {
             chatWindow.style.display = "none";
         });
     </script>
+
 </body>
 </html>
+
