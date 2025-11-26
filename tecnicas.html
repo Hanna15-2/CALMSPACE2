@@ -4,100 +4,166 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Técnicas de Respiración</title>
-    <link rel="stylesheet" href="estilo.css">
+
+    <!-- Fuente Caudex -->
+    <link href="https://fonts.googleapis.com/css2?family=Caudex:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
+        body {
+            font-family: 'Caudex', serif;
+            background-color: #F4F7F2;
+            margin: 0;
+            padding: 0;
+            color: #2E5B24;
+        }
+
+        header {
+            background-color: transparent;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.4em;
+            font-weight: bold;
+            color: #2E5B24;
+        }
+
         main {
             display: flex;
             justify-content: space-around;
             text-align: center;
             padding: 20px;
         }
+
         .tecnica {
             width: 30%;
-            background-color: #f5e6ff;
-            padding: 15px;
-            border-radius: 10px;
-            position: relative;
+            background-color: #DCE5D9;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.12);
         }
+
         .tecnica h2 {
-            color: #4B0082;
+            color: #2E5B24;
+            font-size: 1.5em;
+            margin-top: 10px;
         }
+
+        .tecnica h3 {
+            margin-top: 10px;
+            color: #244B1D;
+        }
+
         .btn-video {
-            background-color: #4B0082;
+            background-color: #2E5B24;
             color: white;
             border: none;
-            padding: 10px 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            padding: 10px 16px;
+            margin-bottom: 12px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1em;
+            font-family: 'Caudex', serif;
+            transition: 0.3s ease;
         }
+
+        .btn-video:hover {
+            background-color: #244B1D;
+        }
+
         .video-container {
             display: none;
             margin-top: 10px;
         }
+
         video {
             width: 100%;
-            border-radius: 8px;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            background-color: transparent;
+            font-size: 1em;
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Técnicas de Respiración</h1>
     </header>
+
     <main>
         <div class="tecnica">
             <button class="btn-video" onclick="mostrarVideo('video1')">Ver Video</button>
+
             <div class="video-container" id="video1">
                 <video controls>
                     <source src="Respiracion_Diafragma.mp4" type="video/mp4">
                     Tu navegador no soporta el video.
                 </video>
             </div>
+
             <h2>Respiración Diafragmática</h2>
             <p>Favorece la oxigenación del cuerpo y activa el sistema nervioso parasimpático, reduciendo el estrés.</p>
+
             <h3>¿Cómo realizarla?</h3>
-            <p>Inhala profundamente inflando el abdomen, mantén el aire unos segundos y exhala lentamente.</p>
+            <p>Inhala profundamente inflando el abdomen, mantén unos segundos y exhala lentamente.</p>
         </div>
+
         <div class="tecnica">
             <button class="btn-video" onclick="mostrarVideo('video2')">Ver Video</button>
+
             <div class="video-container" id="video2">
                 <video controls>
                     <source src="Respiracion_4-7-8.mp4" type="video/mp4">
                     Tu navegador no soporta el video.
                 </video>
             </div>
+
             <h2>Respiración 4-7-8</h2>
-            <p>Regula el ritmo cardíaco y promueve la relajación profunda al ralentizar la respiración.</p>
+            <p>Regula el ritmo cardíaco y promueve una relajación profunda al ralentizar la respiración.</p>
+
             <h3>¿Cómo realizarla?</h3>
-            <p>Inhala en 4 segundos, retén el aire 7 segundos y exhala en 8 segundos. Repite varias veces.</p>
+            <p>Inhala en 4 segundos, sostiene 7 segundos y exhala en 8 segundos. Repite varias veces.</p>
         </div>
+
         <div class="tecnica">
             <button class="btn-video" onclick="mostrarVideo('video3')">Ver Video</button>
+
             <div class="video-container" id="video3">
                 <video controls>
                     <source src="Respiracion_Alterna.mp4" type="video/mp4">
                     Tu navegador no soporta el video.
                 </video>
             </div>
+
             <h2>Respiración Alterna</h2>
             <p>Equilibra los hemisferios cerebrales y mejora la concentración y el bienestar emocional.</p>
+
             <h3>¿Cómo realizarla?</h3>
             <p>Cierra una fosa nasal, inhala por la otra, cambia de lado y exhala. Alterna varias veces.</p>
         </div>
     </main>
+
     <footer>
         <p>&copy; 2025 Espacio de Calma</p>
     </footer>
 
     <script>
         function mostrarVideo(id) {
-            // Oculta todos los contenedores
+            // Oculta todos los contenedores de video
             document.querySelectorAll('.video-container').forEach(container => {
                 container.style.display = 'none';
-                container.querySelector('video').pause(); // Detiene cualquier otro video
+                container.querySelector('video').pause();
             });
-            // Muestra solo el seleccionado
+
+            // Muestra el video seleccionado
             const videoContainer = document.getElementById(id);
             videoContainer.style.display = 'block';
             videoContainer.querySelector('video').play();
@@ -105,3 +171,4 @@
     </script>
 </body>
 </html>
+
